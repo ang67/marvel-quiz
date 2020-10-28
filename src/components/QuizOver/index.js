@@ -7,7 +7,8 @@ const QuizOver = React.forwardRef((props, ref) => {
         score,
         maxQuestions,
         quizLevel,
-        percent
+        percent,
+        loadLevelQuestions
     } = props;
 
     const [asked, setAsked] = useState([])
@@ -17,21 +18,29 @@ const QuizOver = React.forwardRef((props, ref) => {
     }, [ref])
 
     const averageGrade = maxQuestions / 2;
+
+    if (score < averageGrade) {
+        //setTimeout(() => {loadLevelQuestions(0)}, 3000)
+        setTimeout(() => {loadLevelQuestions(quizLevel)}, 3000)
+    }
     const decision = score >= averageGrade ? (
         <Fragment>
             <div className="stepsBtnContainer">
             {
                 quizLevel < levelNames.length ? (
                     <Fragment>
-                        <p className="successMsg"> Passer au niveau suivant !</p>
-                        <button className="btnResult success"> Niveau suivant</button>
+                        <p className="successMsg">Bravo, passer au niveau suivant !</p>
+                        <button className="btnResult success"
+                        onClick={() => loadLevelQuestions(quizLevel)}> Niveau suivant</button>
                     </Fragment>
                 )
                 :
                 (
                     <Fragment>
-                        <p className="successMsg"> Bravo vous êtes un expert !</p>
-                        <button className="btnResult gameOver"> Niveau suivant</button>
+                        <p className="successMsg"> Bravo, vous êtes un expert !</p>
+                        <button className="btnResult gameOver"
+                        onClick={() => loadLevelQuestions(0)}
+                        > Accueil</button>
                     </Fragment>
                 )
             }
@@ -75,6 +84,7 @@ const QuizOver = React.forwardRef((props, ref) => {
             <tr>
                 
                 <td colSpan="3">
+                    <div className="loader"></div>
                     <p style={{textAlign: "center", color: 'red'}}>Pas de réponses !</p>
                 </td>
             </tr>
