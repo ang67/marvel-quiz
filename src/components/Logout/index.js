@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {FirebaseContext }from '../Firebase'
+import ReactTooltip from 'react-tooltip';
 
 const Logout = () => {
 
@@ -23,8 +24,9 @@ const Logout = () => {
 
            <label className="switch">
            <input onChange={handleChange} type="checkbox"  checked={checked}/>
-                <span className="slider round"></span>
+                <span className="slider round" data-tip="Déconnexion"></span>
            </label>
+           <ReactTooltip place="left" effect="solid"/>
         </div>
     );
 };
