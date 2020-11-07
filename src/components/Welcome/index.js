@@ -1,5 +1,5 @@
 import React, { useContext, useState, Fragment, useEffect } from 'react';
-import {FirebaseContext }from '../Firebase'
+import { FirebaseContext } from '../Firebase'
 import Logout from '../Logout'
 import Quiz from '../Quiz';
 import Loader from '../Loader';
